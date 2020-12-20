@@ -1,0 +1,10 @@
+{
+  "name": "boilerplate-railsapi-reactapp",
+  "version": "1.0.0",
+  "description": "boilerplate for react app, rails api",
+  "scripts": {
+    "build": "cd client && npm install && npm run build && cd ..",
+    "deploy": "cp -a client/build/. public/",
+    "postinstall": "npm run build && npm run deploy && echo 'Client built!'"
+  }
+}
