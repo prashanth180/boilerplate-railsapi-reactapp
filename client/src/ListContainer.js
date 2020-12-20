@@ -9,7 +9,7 @@ function ListContainer() {
   const [editingListId, setEditingListId] = useState();
   
   useEffect(() =>{
-    axios.get('http://localhost:3001/api/v1/lists.json')
+    axios.get('/api/v1/lists.json')
         .then(response => {
             console.log(response)
             setLists(response.data)
@@ -19,7 +19,7 @@ function ListContainer() {
   console.log(lists);
 
   const removeList = (id) => {
-    axios.delete( 'http://localhost:3001/api/v1/lists/' + id )
+    axios.delete( '/api/v1/lists/' + id )
     .then((response) => {
         const filtered_lists = lists.filter(
             list => list.id !== id
@@ -33,7 +33,7 @@ function ListContainer() {
   }
 
   const editList= (id, title, excerpt) => {
-    axios.put( 'http://localhost:3001/api/v1/lists/' + id, { 
+    axios.put( '/api/v1/lists/' + id, { 
         list: {
             title, 
             excerpt
@@ -50,7 +50,7 @@ function ListContainer() {
   }
 
   const addNewList=(title, excerpt) =>{
-    axios.post( 'http://localhost:3001/api/v1/lists', { list: {title, excerpt} })
+    axios.post( '/api/v1/lists', { list: {title, excerpt} })
     .then(response => {
         console.log(response)
         
