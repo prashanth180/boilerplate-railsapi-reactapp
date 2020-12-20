@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 function EditListForm(props) {
 
   const [list, setList]= useState({
