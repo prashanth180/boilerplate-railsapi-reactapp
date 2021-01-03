@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios';
 import List from './List';
 import EditListForm from './EditListForm';
 import NewListForm from './NewListForm';
+import {connect} from 'react-redux'; 
+import {loadItems, addItems} from  './actions';
+import axios from 'axios';
 
-function ListContainer() {
+function ListContainer(props) {
   const [lists, setLists] = useState([]);
   const [editingListId, setEditingListId] = useState();
-  
+  const { items, error } = props
+
   useEffect(() =>{
-    axios.get('/api/v1/lists.json')
-        .then(response => {
-            console.log(response)
-            setLists(response.data)
-        })
-        .catch(error => console.log(error))
+    console.log("LOADDDD ITEMS");
+    props.loadItems()
   },[])
   console.log(lists);
 
@@ -50,21 +49,24 @@ function ListContainer() {
   }
 
   const addNewList=(title, excerpt) =>{
-    axios.post( '/api/v1/lists', { list: {title, excerpt} })
-    .then(response => {
-        console.log(response)
+    console.log('IN ADD NEW LIST');
+    props.addItems(title, excerpt);
+    
+    // axios.post( '/api/v1/lists', { list: {title, excerpt} })
+    // .then(response => {
+    //     console.log(response)
         
-        setLists([ ...lists, response.data ])
-    })
-    .catch(error => {
-        console.log(error)
-    })
+    //     setLists([ ...lists, response.data ])
+    // })
+    // .catch(error => {
+    //     console.log(error)
+    // })
   }
 
   return (
     <div className="listContainer">
       <h1>LISTS</h1>
-      {lists.map( (list) => editingListId === list.id ? (
+      {items.map( (list) => editingListId === list.id ? (
           <EditListForm list={list} key={list.id} editList={editList}/>
         ):(
           <List list={list} key={list.id} onRemoveList={removeList}/>
@@ -72,8 +74,20 @@ function ListContainer() {
       )}
       <NewListForm onNewList={addNewList} />
       <br/>
+      {error && <div className="error">{JSON.stringify(error)}</div>}
     </div>
   )
 }
 
-export default ListContainer
+const mapStateToProps = ({isLogin, items, error}) => ({
+  isLogin,
+  items,
+  error,
+}); 
+
+const mapDispatchToProps = dispatch => ({
+  loadItems: () => dispatch(loadItems()),
+  addItems: (title, excerpt) => dispatch(addItems(title, excerpt))
+})
+
+export default connect( mapStateToProps, mapDispatchToProps)(ListContainer);

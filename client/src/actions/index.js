@@ -1,4 +1,4 @@
-import { USER } from '../constants';
+import { ITEMS, USER, COMMON } from '../constants';
 
 const userLogin = () => ({
   type: USER.LOGIN,
@@ -9,8 +9,8 @@ const setUser = user => ({
   user,
 })
 
-const setLoginError = error => ({
-  type: USER.LOGIN_FAIL,
+const setError = error => ({
+  type: COMMON.ERROR,
   error,
 })
 
@@ -23,9 +23,24 @@ const unSetUser = user => ({
   user: null,
 })
 
-const setLogoutError = error => ({
-  type: USER.LOGOUT_FAIL,
-  error,
+
+const loadItems = () => ({
+  type: ITEMS.LOAD,
 })
 
-export { userLogin, setUser, setLoginError, userLogout, unSetUser, setLogoutError}
+const setItems = items => ({
+  type: ITEMS.LOAD_SUCCESS,
+  items,
+})
+
+const addItems = (title, excerpt) => ({
+  type: ITEMS.ADD,
+  title,
+  excerpt
+})
+const addItemsSuccess = items => ({
+  type: ITEMS.ADD_SUCCESS,
+  items,
+})
+
+export { userLogin, setUser, userLogout, unSetUser, loadItems, setItems, addItems, addItemsSuccess, setError}

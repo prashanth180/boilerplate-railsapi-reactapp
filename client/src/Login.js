@@ -13,7 +13,6 @@ function Login(props) {
     event.preventDefault()
     console.log("PROPS----");
     console.log(props);
-    props.userLogin();
     axios.post('/api/v1/login', {user}, {withCredentials: true})
     .then(response => {
       if (response.data.logged_in) {
@@ -80,6 +79,6 @@ const mapStateToProps = ({isLogin, user, error}) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  userLogin: () => dispatch(userLogin()),
+  // userLogin: () => dispatch(userLogin()),
 })
 export default connect( mapStateToProps, mapDispatchToProps)(Login);
