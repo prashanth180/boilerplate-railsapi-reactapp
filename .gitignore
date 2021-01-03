@@ -22,6 +22,4 @@
 /config/master.key
 
 # production
- public
- public/
- public/*
+/public/*
