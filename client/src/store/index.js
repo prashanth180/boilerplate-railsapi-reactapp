@@ -13,11 +13,18 @@ const configureStore = () => {
       window.__REDUX_DEVTOOLS_EXTENSION__ &&
         window.__REDUX_DEVTOOLS_EXTENSION__(),
     )
-    
   );
   sagaMiddleware.run(rootSaga);
 
+  store.dispatch({type: 'POST_LOGIN'});
   store.dispatch({type: 'HELLO'});
+  store.dispatch({type: 'LOGOUT'});
+  store.dispatch({type: 'LOGIN'});
+  store.dispatch({type: 'POST_LOGIN'});
+  store.dispatch({type: 'HELLO'});
+  store.dispatch({type: 'LOGOUT'});
+  store.dispatch({type: 'POST_LOGIN'});
+
   return store;
 }
 
