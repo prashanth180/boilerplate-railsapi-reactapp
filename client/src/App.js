@@ -7,6 +7,10 @@ import axios from 'axios';
 import { useHistory } from "react-router-dom";
 import Login from './Login';
 import SignUp from './SignUp';
+import {Provider} from 'react-redux';
+import configureStore from './store';
+
+const store = configureStore();
 
 function App() {
   let history = useHistory();
@@ -42,18 +46,20 @@ function App() {
   },[])
 
   return (
-    <Router>
-      <Switch>
-        <div className="app">
-          
-          <Route exact path="/" component={ListContainer}/>
-          <Route exact path='/login' render={() => (<Login handleLogin={handleLogin} />)}/>
-          <Route exact path='/signup' component={SignUp}/>
-          <Route path="/hello" component={Hello} >
-          </Route>
-        </div>
-      </Switch>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <Switch>
+          <div className="app">
+            
+            <Route exact path="/" component={ListContainer}/>
+            <Route exact path='/login' render={() => (<Login handleLogin={handleLogin} />)}/>
+            <Route exact path='/signup' component={SignUp}/>
+            <Route path="/hello" component={Hello} >
+            </Route>
+          </div>
+        </Switch>
+      </Router>
+    </Provider>
   );
 }
 

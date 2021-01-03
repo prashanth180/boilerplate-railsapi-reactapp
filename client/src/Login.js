@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
+import {connect} from 'react-redux'; 
 
 function Login(props) {
   const [user, setUser] = useState({email: '', password: ''});
@@ -71,4 +72,9 @@ function Login(props) {
   )
 }
 
-export default Login
+const mapStateToProps = ({isLoading, images, error}) => ({
+  isLoading,
+  images,
+  error,
+})
+export default connect( mapStateToProps, null)(Login);

@@ -24,4 +24,4 @@
 # production
  public
  public/
- /public
+ public/*
