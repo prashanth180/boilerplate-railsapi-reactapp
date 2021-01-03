@@ -1,5 +1,5 @@
 import { call, put, take, takeEvery } from 'redux-saga/effects';
-
+import { USER } from '../constants';
 
 function* workerSaga(){
   console.log('worker saga');
@@ -9,14 +9,14 @@ function* workerSaga(){
 
 function* loginSaga(){
   console.log('login saga');
-  console.log(put({type: 'ACTION_LOGIN'}));
-  yield put({type: 'ACTION_LOGIN'});
+  console.log(put({type: 'USER_LOGIN'}));
+  yield put({type: 'USER_LOGIN'});
 }
 
 function* logoutSaga(){
   console.log('logout saga');
-  console.log(put({type: 'ACTION_LOGOUT'}));
-  yield put({type: 'ACTION_LOGOUT'});
+  console.log(put({type: 'USER_LOGOUT'}));
+  yield put({type: 'USER_LOGOUT'});
 }
 
 function* postLoginSaga(){
@@ -29,13 +29,8 @@ function* postLoginSaga(){
 // watcher saga
 function* rootSaga(){
   //takeEvery can be called multiple times, take is called only once, anything between take actions is called only after previous take action
-  yield takeEvery('HELLO', workerSaga);
-  yield take('LOGIN');
+  yield take(USER.LOGIN);
   yield call(loginSaga);
-  yield take('POST_LOGIN');
-  yield call(postLoginSaga);
-  yield take('LOGOUT');
-  yield call(logoutSaga);
 }
 // watcher saga -> actions -> worker saga
 export default rootSaga;

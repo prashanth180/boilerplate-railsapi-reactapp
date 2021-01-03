@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
 import {connect} from 'react-redux'; 
-
+import {userLogin} from  './actions'
 function Login(props) {
   const [user, setUser] = useState({email: '', password: ''});
   const [errors, setErrors] = useState();
@@ -13,6 +13,7 @@ function Login(props) {
     event.preventDefault()
     console.log("PROPS----");
     console.log(props);
+    props.userLogin();
     axios.post('/api/v1/login', {user}, {withCredentials: true})
     .then(response => {
       if (response.data.logged_in) {
@@ -72,9 +73,13 @@ function Login(props) {
   )
 }
 
-const mapStateToProps = ({isLoading, images, error}) => ({
-  isLoading,
-  images,
+const mapStateToProps = ({isLogin, user, error}) => ({
+  isLogin,
+  user,
   error,
+});
+
+const mapDispatchToProps = dispatch => ({
+  userLogin: () => dispatch(userLogin()),
 })
-export default connect( mapStateToProps, null)(Login);
+export default connect( mapStateToProps, mapDispatchToProps)(Login);
