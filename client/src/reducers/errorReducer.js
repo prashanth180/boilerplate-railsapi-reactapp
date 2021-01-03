@@ -1,11 +1,11 @@
-import { IMAGES } from "../constants";
+import { USER } from "../constants";
 
 const errorReducer = (state= null, action) =>{
   switch(action.type){
-    case IMAGES.LOAD_FAIL:
+    case USER.LOGIN_FAIL:
       return action.error;
-    case IMAGES.LOAD:
-    case IMAGES.LOAD_SUCCESS:
+    case USER.LOGIN:
+    case USER.LOGIN_SUCCESS:
       return null;
     default:
       return state;

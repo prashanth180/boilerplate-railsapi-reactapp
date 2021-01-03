@@ -1,17 +1,31 @@
-import { IMAGES } from '../constants';
+import { USER } from '../constants';
 
-const loadImages = () => ({
-  type: IMAGES.LOAD,
+const userLogin = () => ({
+  type: USER.LOGIN,
 });
 
-const setImages = images => ({
-  type: IMAGES.LOAD_SUCCESS,
-  images,
+const setUser = user => ({
+  type: USER.LOGIN_SUCCESS,
+  user,
 })
 
-const setError = error => ({
-  type: IMAGES.LOAD_FAIL,
+const setLoginError = error => ({
+  type: USER.LOGIN_FAIL,
   error,
 })
 
-export { loadImages, setImages, setError}
+const userLogout = () => ({
+  type: USER.LOGOUT,
+});
+
+const unSetUser = user => ({
+  type: USER.LOGOUT_SUCCESS,
+  user: null,
+})
+
+const setLogoutError = error => ({
+  type: USER.LOGOUT_FAIL,
+  error,
+})
+
+export { userLogin, setUser, setLoginError, userLogout, unSetUser, setLogoutError}

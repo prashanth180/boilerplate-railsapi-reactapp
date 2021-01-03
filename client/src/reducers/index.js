@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
 
-import loadingReducer from "./loadingReducer";
-import imagesReducer from "./imagesReducer";
+import loginReducer from "./loginReducer";
+import userReducer from "./userReducer";
 import errorReducer from "./errorReducer";
 
 const rootReducer = combineReducers({
-  isLoading: loadingReducer,
-  images: imagesReducer,
+  isLogin: loginReducer,
+  user: userReducer,
   error: errorReducer,
 });
 
