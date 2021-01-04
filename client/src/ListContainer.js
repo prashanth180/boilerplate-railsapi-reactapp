@@ -3,7 +3,7 @@ import List from './List';
 import EditListForm from './EditListForm';
 import NewListForm from './NewListForm';
 import {connect} from 'react-redux'; 
-import {loadItems, addItems} from  './actions';
+import {loadItems, addItems, deleteItems} from  './actions';
 import axios from 'axios';
 
 function ListContainer(props) {
@@ -18,17 +18,19 @@ function ListContainer(props) {
   console.log(lists);
 
   const removeList = (id) => {
-    axios.delete( '/api/v1/lists/' + id )
-    .then((response) => {
-        const filtered_lists = lists.filter(
-            list => list.id !== id
-        )
-        console.log(filtered_lists);
-        setLists(filtered_lists)
-        console.log("🦅 ");
-        console.log(lists)
-    })
-    .catch(error => console.log(error))
+    console.log("IN REMOVE LIST", id);
+    props.deleteItems(id);
+    // axios.delete( '/api/v1/lists/' + id )
+    // .then((response) => {
+    //     const filtered_lists = lists.filter(
+    //         list => list.id !== id
+    //     )
+    //     console.log(filtered_lists);
+    //     setLists(filtered_lists)
+    //     console.log("🦅 ");
+    //     console.log(lists)
+    // })
+    // .catch(error => console.log(error))
   }
 
   const editList= (id, title, excerpt) => {
@@ -49,18 +51,8 @@ function ListContainer(props) {
   }
 
   const addNewList=(title, excerpt) =>{
-    console.log('IN ADD NEW LIST');
+    console.log('IN ADD NEW ITEM');
     props.addItems(title, excerpt);
-    
-    // axios.post( '/api/v1/lists', { list: {title, excerpt} })
-    // .then(response => {
-    //     console.log(response)
-        
-    //     setLists([ ...lists, response.data ])
-    // })
-    // .catch(error => {
-    //     console.log(error)
-    // })
   }
 
   return (
@@ -87,7 +79,8 @@ const mapStateToProps = ({isLogin, items, error}) => ({
 
 const mapDispatchToProps = dispatch => ({
   loadItems: () => dispatch(loadItems()),
-  addItems: (title, excerpt) => dispatch(addItems(title, excerpt))
+  addItems: (title, excerpt) => dispatch(addItems(title, excerpt)),
+  deleteItems: (id) => dispatch(deleteItems(id)),
 })
 
 export default connect( mapStateToProps, mapDispatchToProps)(ListContainer);

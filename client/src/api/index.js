@@ -24,4 +24,17 @@ const postItems = async (title, excerpt) => {
   return response.data;
 }
 
-export { fetchItems, postItems }
+const deleteItems = async (id) => {
+  console.log('IN DELETE ITEMS');
+  const response = await axios.delete( '/api/v1/lists/' + id )
+  console.log('RESPONSEEEE', response);
+  console.log("DELETE ITEMS", response.data);
+  if (response.status >= 400){
+    console.log("IN DELETE ITEMS ERRORS");
+    throw new Error(response.errors)
+  }
+  console.log("IN RETURN DATA", response.data);
+  return response.data;
+}
+
+export { fetchItems, postItems, deleteItems }

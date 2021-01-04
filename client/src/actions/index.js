@@ -43,4 +43,14 @@ const addItemsSuccess = items => ({
   items,
 })
 
-export { userLogin, setUser, userLogout, unSetUser, loadItems, setItems, addItems, addItemsSuccess, setError}
+const deleteItems = (id) => ({
+  type: ITEMS.DELETE,
+  id
+})
+
+const deleteItemsSuccess = id => ({
+  type: ITEMS.DELETE_SUCCESS,
+  id,
+})
+
+export { userLogin, setUser, userLogout, unSetUser, loadItems, setItems, addItems, addItemsSuccess, deleteItems, deleteItemsSuccess, setError}
