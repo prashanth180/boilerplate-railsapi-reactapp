@@ -5,15 +5,22 @@ import NewListForm from './NewListForm';
 import {connect} from 'react-redux'; 
 import {loadItems, addItems, deleteItems} from  './actions';
 import axios from 'axios';
+import { useHistory } from "react-router-dom";
 
 function ListContainer(props) {
   const [lists, setLists] = useState([]);
   const [editingListId, setEditingListId] = useState();
   const { items, error } = props
+  let history = useHistory();
 
   useEffect(() =>{
     console.log("LOADDDD ITEMS");
-    props.loadItems()
+    if(props.user){
+      props.loadItems()
+    }else{
+      history.push('/login')
+    }
+    
   },[])
   console.log(lists);
 
@@ -71,10 +78,10 @@ function ListContainer(props) {
   )
 }
 
-const mapStateToProps = ({isLogin, items, error}) => ({
-  isLogin,
+const mapStateToProps = ({items, user, error}) => ({
   items,
   error,
+  user,
 }); 
 
 const mapDispatchToProps = dispatch => ({

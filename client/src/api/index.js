@@ -37,4 +37,18 @@ const deleteItems = async (id) => {
   return response.data;
 }
 
-export { fetchItems, postItems, deleteItems }
+const loginUser = async (user) => {
+  console.log('IN Login USER', user);
+  
+  const response = await axios.post('/api/v1/login', {user}, {withCredentials: true})
+  console.log('RESPONSEEEE', response);
+  console.log("LOGIN USER", response.data);
+  if (response.status >= 400){
+    console.log("IN LOGIN USER ERRORS");
+    throw new Error(response.errors)
+  }
+  console.log("IN LOGIN USER RETURN DATA ", response.data);
+  return response.data.user;
+}
+
+export { fetchItems, postItems, deleteItems, loginUser }

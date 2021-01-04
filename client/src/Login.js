@@ -1,29 +1,38 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
 import {connect} from 'react-redux'; 
 import {userLogin} from  './actions'
+
 function Login(props) {
   const [user, setUser] = useState({email: '', password: ''});
   const [errors, setErrors] = useState();
   let history = useHistory();
 
+  useEffect(()=>{
+    if(props.user){
+      redirect();
+    }
+  }, [props.user]);
+
   const handleSubmit = (event) => {
-    event.preventDefault()
-    console.log("PROPS----");
-    console.log(props);
-    axios.post('/api/v1/login', {user}, {withCredentials: true})
-    .then(response => {
-      if (response.data.logged_in) {
-        console.log(response);
-        props.handleLogin(response.data)
-        redirect()
-      } else {
-        setErrors(response.data.errors)
-      }
-    })
-    .catch(error => console.log('api errors:', error))
+    event.preventDefault();
+    console.log('IN HANDLE SUBMIT', user);
+
+    props.userLogin(user);
+    console.log('AFTER HANDLE SUBMIT', user);
+    // axios.post('/api/v1/login', {user}, {withCredentials: true})
+    // .then(response => {
+    //   if (response.data.logged_in) {
+    //     console.log(response);
+    //     props.handleLogin(response.data)
+    //     redirect()
+    //   } else {
+    //     setErrors(response.data.errors)
+    //   }
+    // })
+    // .catch(error => console.log('api errors:', error))
   }
 
   const redirect = () => {
@@ -72,13 +81,12 @@ function Login(props) {
   )
 }
 
-const mapStateToProps = ({isLogin, user, error}) => ({
-  isLogin,
+const mapStateToProps = ({user, error}) => ({
   user,
   error,
 });
 
 const mapDispatchToProps = dispatch => ({
-  // userLogin: () => dispatch(userLogin()),
+  userLogin: (user) => dispatch(userLogin(user)),
 })
 export default connect( mapStateToProps, mapDispatchToProps)(Login);

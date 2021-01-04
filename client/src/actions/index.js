@@ -1,7 +1,8 @@
 import { ITEMS, USER, COMMON } from '../constants';
 
-const userLogin = () => ({
+const userLogin = user => ({
   type: USER.LOGIN,
+  user
 });
 
 const setUser = user => ({
