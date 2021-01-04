@@ -3,9 +3,10 @@
 bin/rake start:production
 
 VERSIONS:
-ruby - 2.6.2
-rails - 6.0.3
-Postgres - 12.1
+
+- ruby - 2.6.2
+- rails - 6.0.3
+- Postgres - 12.1
 
 reactjs - frontend
 redux - state management
