@@ -1,29 +1,16 @@
-# README
+# START THE APPLICATION
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-- Ruby version
-
-- System dependencies
-
-- Configuration
-
-- Database creation
-
-- Database initialization
-
-- How to run the test suite
-
-- Services (job queues, cache servers, search engines, etc.)
-
-- Deployment instructions
-
-- ...
-
-# boilerplate-railsapi-reactapp
-
-START THE APPLICATION
 bin/rake start:production
+
+VERSIONS:
+ruby - 2.6.2
+rails - 6.0.3
+Postgres - 12.1
+
+reactjs - frontend
+redux - state management
+redux saga - asynchronous management
+
+#DETAILS
+ITEMS - API support with frontend built for add, load, delete functionalities using react, redux, redux saga
+LOGIN - API support with mandatory login for items access
